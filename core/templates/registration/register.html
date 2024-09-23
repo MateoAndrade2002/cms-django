@@ -1,0 +1,52 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration/register.css' %}">
+{% endblock styles %}
+
+{% block title %}Manage Users{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+<h2>Create new user</h2>
+<form method="post" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}:</label>
+        {{ user_form.username }}
+        {{ user_form.username.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ user_form.first_name.id_for_label }}">{{ user_form.first_name.label }}:</label>
+        {{ user_form.first_name }}
+        {{ user_form.first_name.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}:</label>
+        {{ user_form.email }}
+        {{ user_form.email.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ user_form.password.id_for_label }}">{{ user_form.password.label }}:</label>
+        {{ user_form.password }}
+        {{ user_form.password.errors }}
+    </div>
+    <div class="form-group">
+        <label for="{{ user_form.password2.id_for_label }}">{{ user_form.password2.label }}:</label>
+        {{ user_form.password2 }}
+        {{ user_form.password2.errors }}
+    </div>
+    <p><input type="submit" value="Create"></p>
+</form>
+<a href="{% url 'account:users' %}" class="generic_button">Cancel</a>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

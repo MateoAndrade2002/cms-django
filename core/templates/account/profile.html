@@ -1,0 +1,43 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/profile.css' %}">
+{% endblock styles %}
+
+{% block title %}Profile{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+    <section class="profile">
+        <div class="profile__content">
+            <div class="profile_photo">
+                {% if viewed_user.profile.photo %}
+                    <img src="{{ viewed_user.profile.photo.url }}" alt="{{ viewed_user.first_name|default:viewed_user.username }} profile photo" class="profile_img"/>
+                {% else %}
+                    <img src="/media/users/2024/06/27/blank.png" alt="No profile photo" class="profile_img"/>
+                {% endif %}
+            </div>
+            <div class="profile_info">
+                <h1>{{ viewed_user.username }}</h1>
+                <p>{{ viewed_user.first_name }} {{ viewed_user.last_name }}</p>
+                <p>{{ viewed_user.email }}</p>
+            </div>
+        </div>
+        <div class="profile__actions">
+            <div class="buttons">
+                <a href="{% url 'account:edit' username=viewed_user.username %}" class="generic_button">Edit User</a>
+                <a href="{% url 'registration:logout' %}" class="generic_button">Logout</a>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

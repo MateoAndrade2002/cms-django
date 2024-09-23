@@ -1,0 +1,71 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/settings.css' %}">
+{% endblock styles %}
+
+{% block title %}Settings{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Settings</h2>
+
+    <form method="post">
+        {% comment %} {{ seo_edit_form.as_p }} {% endcomment %}
+        <div class="form-group">
+            <label for="{{ seo_edit_form.title.id_for_label }}">{{ seo_edit_form.title.label }}:</label>
+            {{ seo_edit_form.title }}
+            {{ seo_edit_form.title.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.meta_description.id_for_label }}">{{ seo_edit_form.meta_description.label }}:</label>
+            {{ seo_edit_form.meta_description }}
+            {{ seo_edit_form.meta_description.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.keywords.id_for_label }}">{{ seo_edit_form.keywords.label }}:</label>
+            {{ seo_edit_form.keywords }}
+            {{ seo_edit_form.keywords.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.robots.id_for_label }}">{{ seo_edit_form.robots.label }}:</label>
+            {{ seo_edit_form.robots }}
+            {{ seo_edit_form.robots.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.og_title.id_for_label }}">{{ seo_edit_form.og_title.label }}:</label>
+            {{ seo_edit_form.og_title }}
+            {{ seo_edit_form.og_title.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.og_description.id_for_label }}">{{ seo_edit_form.og_description.label }}:</label>
+            {{ seo_edit_form.og_description }}
+            {{ seo_edit_form.og_description.errors }}
+        </div>
+        <div class="form-group">
+            <label for="{{ seo_edit_form.og_image_url.id_for_label }}">{{ seo_edit_form.og_image_url.label }}:</label>
+            {{ seo_edit_form.og_image_url }}
+            {{ seo_edit_form.og_image_url.errors }}
+        </div>
+        {% csrf_token %}
+        <p><input type="submit" value="Update"></p>
+    </form>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

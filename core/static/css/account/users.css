@@ -1,0 +1,83 @@
+.users_create{
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.users_create p{
+    font-size: var(--small-fz);
+}
+.users_create .button{
+    display: inline-block;
+    width: 150px;
+    padding: 5px 0;
+    border-radius: 35px;
+    background-color: var(--color-primary-700);
+    text-align: center;
+    color: var(--color-white);
+    font-size: var(--large-fz);
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s ease-in-out;
+}
+.users_create .button:hover{
+    background-color: var(--color-primary-500);
+}
+.user_lists{
+    margin: 20px auto;
+    width: 100%;
+}
+.user_lists table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.user_lists table th{
+    padding: 10px;
+    border-bottom: 1px solid var(--color-primary-500);
+}
+.user_lists table td{
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-primary-500);
+}
+.user_lists table tr{
+    transition: .3s ease-in-out;
+}
+.user_lists table tr:nth-child(2n){
+    background-color: var(--color-white);
+}
+.user_lists table tr:hover{
+    background-color: var(--color-primary-300);
+}
+
+.user_lists table a.user_link{
+    color: var(--color-primary-700);
+    text-decoration: none;
+    font-size: var(--small-fz);
+}
+.user_lists table p{
+    color: var(--color-black);
+    font-size: var(--small-fz);
+}
+.user_lists table .button{
+    display: inline-block;
+    width: 60px;
+    padding: 1px 0;
+    border-radius: 35px;
+    background-color: var(--color-primary-700);
+    text-align: center;
+    color: var(--color-white);
+    font-size: var(--small-fz);
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s ease-in-out;
+}
+.user_lists table .button:hover{
+    background-color: var(--color-primary-500);
+}
+.user_lists p.total_users{
+    margin: 20px 0;
+    font-size: var(--small-fz);
+    text-align: right;
+}

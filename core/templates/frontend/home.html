@@ -1,0 +1,15 @@
+{% load static %}
+{% extends "frontend_base.html" %}
+
+{% block title %}Home - Mi Sitio{% endblock title %}
+
+{% block content %}
+<main class="home">
+    HOME
+    {% if request.user.is_authenticated %}
+        {% if user.is_superuser %}
+            <a href="{% url 'account:dashboard' %}">Go to the admin</a>
+        {% endif %}
+    {% endif %}
+</main>
+{% endblock content %}

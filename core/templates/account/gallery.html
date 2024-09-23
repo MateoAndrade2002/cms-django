@@ -1,0 +1,75 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/gallery.css' %}">
+{% endblock styles %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+    <section class="gallery">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <h2>Gallery</h2>
+        <div class="gallery_content">
+            <div class="upload_form">
+                <form method="post" enctype="multipart/form-data">
+                    {% comment %} {{ form_media_context.as_p }} {% endcomment %}
+                    <div class="form-group">
+                        <label for="{{ form_media_context.title.id_for_label }}">{{ form_media_context.title.label }}:</label>
+                        {{ form_media_context.title }}
+                        {{ form_media_context.title.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form_media_context.image.id_for_label }}">{{ form_media_context.image.label }}:</label>
+                        {{ form_media_context.image }}
+                        {{ form_media_context.image.errors }}
+                    </div>
+                    {% csrf_token %}
+                    <p><input type="submit" value="Upload"></p>
+                </form>
+            </div>
+            <div class="gallery_images" id="gallery">
+                {% for media in gallery_content %}
+                    <div class="image" data-info="{{ media.image.url }}">
+                        <img src="{{ media.image.url }}" alt="Image" width="100">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal_content">
+                <span class="close"><i class="fa-solid fa-xmark"></i></span>
+                <img class="modal-content" id="modal-img">
+                <div id="caption"></div>
+            </div>
+        </div>
+    </section>
+                    {% comment %} <ul>
+                    {% for media in gallery_content %}
+                        <li>
+                            {{ media.image.url }}
+                            <img src="{{ media.image.url }}" alt="Image" width="100">
+                            {{ media.title }}
+                        </li>
+                    {% endfor %}
+                </ul> {% endcomment %}
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

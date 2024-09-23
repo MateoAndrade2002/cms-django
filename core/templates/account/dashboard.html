@@ -1,0 +1,27 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/dashboard.css' %}">
+{% endblock styles %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+    <section class="dashboard">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome to your dashboard.</p>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

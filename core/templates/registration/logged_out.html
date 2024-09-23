@@ -1,0 +1,16 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/logout.css' %}">
+{% endblock styles %}
+
+{% block title %}Logged out{% endblock title %}
+
+{% block content %}
+    <h1>Logged out</h1>
+    <p>
+        You have been successfully logged out.
+        You can <a href="{% url "registration:login" %}">log-in again</a>.
+    </p>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ seo_instance.title }}{% endblock title %}</title>
+    {% block meta %}
+        {% if seo_instance %}
+            <meta name="description" content="{{ seo_instance.meta_description }}">
+            <meta name="keywords" content="{{ seo_instance.keywords }}">
+            <meta name="robots" content="{{ seo_instance.robots }}">
+            <meta property="og:title" content="{{ seo_instance.og_title }}">
+            <meta property="og:description" content="{{ seo_instance.og_description }}">
+            <meta property="og:image" content="{{ seo_instance.og_image_url }}">
+        {% endif %}
+    {% endblock meta %}
+    <link rel="stylesheet" href="{% static 'css/frontend/home.css' %}">
+    {% block styles %}{% endblock styles %}
+</head>
+<body>
+    {% block content %}{% endblock content %}
+    {% block footer %}{% endblock footer %}
+
+    <script src="https://kit.fontawesome.com/91a825c20e.js" crossorigin="anonymous"></script>
+    {% block javascript %}{% endblock javascript %}
+</body>
+</html>

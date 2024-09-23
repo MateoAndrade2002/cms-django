@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/admin_css.css' %}">
+    {% block styles %}{% endblock styles %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <main class="dashboard_main">
+        {% if request.user.is_authenticated %}
+            <div class="navigation">
+                {% block navbar %}{% endblock navbar %}
+            </div>
+        {% endif %}
+
+        <div class="main">
+            <div class="content">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </main>
+
+    {% block footer %}{% endblock footer %}
+
+    {% block javascript %}{% endblock javascript %}
+    <script src="https://kit.fontawesome.com/91a825c20e.js" crossorigin="anonymous"></script>
+</body>
+</html>

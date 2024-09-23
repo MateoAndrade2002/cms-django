@@ -1,0 +1,63 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/account/users.css' %}">
+{% endblock styles %}
+
+{% block title %}Manage Users{% endblock title %}
+
+{% if request.user.is_authenticated %}
+    {% block navbar %}
+        {% include "account/components/admin_nav.html" %}
+    {% endblock navbar %}
+{% endif %}
+
+{% block content %}
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h2>Users</h2>
+    <div class="users_create">
+        <p>Don't have enough users? Create more</p>
+        <a href="{% url 'registration:register' %}" class="button">Create User</a>
+    </div>
+    <div class="user_lists">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr class="user_row">
+                    <td><a href="{% url 'account:profile' username=user.username %}" class="user_link">{{ user.username }}</a></td>
+                    <td><p>{{ user.email }}</p></td>
+                    <td><a href="{% url 'account:edit' username=user.username %}" class="button">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total_users">Total users: {{ users|length }}</p>
+        {% comment %} {% for user in users %}
+            <div class="user">
+                <a href="{% url 'account:profile' username=user.username %}" class="user_link">{{ user.username }}</a>
+                <p>{{ user.email }}</p>
+                <a href="{% url 'account:edit' username=user.username %}">Edit</a>
+            </div>
+        {% endfor %} {% endcomment %}
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'js/admin_js.js' %}"></script>
+{% endblock javascript %}

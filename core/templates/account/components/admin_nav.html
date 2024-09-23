@@ -1,0 +1,58 @@
+<nav id="admin_navbar">
+    <div class="navbar__content">
+        <a href="/" class="logo">MAGHORA</a>
+        {% if request.user.is_authenticated %}
+            <div class="menu__content">
+                <ul class="menu">
+                    <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:dashboard' %}" class="menu_link"><i class="fa-solid fa-gauge"></i>My dashboard</a>
+                    </li>
+                    <li {% if section == "posts" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:dashboard' %}" class="menu_link"><i class="fa-solid fa-thumbtack"></i>Posts</a>
+                    </li>
+                    <li {% if section == "pages" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:dashboard' %}" class="menu_link"><i class="fa-solid fa-file-lines"></i>Pages</a>
+                    </li>
+                    <li {% if section == "gallery" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:gallery' %}" class="menu_link"><i class="fa-solid fa-images"></i>Media</a>
+                    </li>
+                    <li {% if section == "users" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:users' %}" class="menu_link"><i class="fa-solid fa-user"></i>Users</a>
+                    </li>
+                    <li {% if section == "settings" %}class="selected"{% endif %}>
+                        <a href="{% url 'account:settings' %}" class="menu_link"><i class="fa-solid fa-gear"></i>Settings</a>
+                    </li>
+                </ul>
+                <div class="user_dropdown" id="dropdown_activator">
+                    <div class="user_profile">
+                        <div class="image_profile">
+                            {% if request.user.profile.photo %}
+                                <img src="{{ request.user.profile.photo.url }}" alt="{{ request.user.first_name|default:request.user.username }} profile photo" class="profile_photo"/>
+                            {% else %}
+                                <img src="/media/users/2024/06/27/blank.png" alt="No photo available" class="profile_photo"/>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="welcome_username">
+                        Welcome, <br> <strong>{{ request.user.first_name|default:request.user.username }}</strong>
+                    </p>
+                    <div class="dropdown" id="dropdown">
+                        <div class="dropdown__content">
+                            <ul class="menu">
+                                <li>
+                                    <a href="{% url 'registration:logout' %}" class="menu_link"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+                                </li>
+                                <li {% if section == "profile" %}class="selected"{% endif %}>
+                                    <a href="{% url 'account:profile' username=user.username %}" class="menu_link"><i class="fa-solid fa-circle-user"></i>Profile</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            You don't have fucking access to this fucking area, please <a href="{% url 'login' %}">Log-in</a>
+        {% endif %}
+    </div>
+</nav>
